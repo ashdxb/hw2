@@ -56,6 +56,17 @@ public class Folder extends StorageItem {
         }
     }
 
-    public void printTree(SortingField name) {
+    public void printer(SortingField name , int counter) {
+        System.out.println(this.getName());
+        for (StorageItem item:this.folderContents){
+            for (int i = 0 ; i < counter ; i++) {
+                System.out.print("    |");
+            }
+            printer(name , counter+1);
+        }
     }
+
 }
+
+
+
