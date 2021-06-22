@@ -26,5 +26,5 @@ abstract class StorageItem {
 
     abstract public int getSize();
 
-    abstract void printTree();
+    abstract void printTree(SortingField name);
 }
