@@ -28,4 +28,6 @@ abstract class StorageItem {
     abstract public int getSize();
 
     abstract void printTree(SortingField name);
+
+    abstract void printer(SortingField name, int depth);
 }

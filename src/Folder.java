@@ -30,7 +30,10 @@ public class Folder extends StorageItem {
         char curr = path.charAt(0);
         int i;
         int len = path.length();
-        for (i = 0; curr != '/' && i < len; i++, curr = path.charAt(i)) file_name.append(path.charAt(i));
+        for (i = 0; curr != '/' && i < len; i++){
+            curr = path.charAt(i);
+            file_name.append(curr);
+        }
         if (i == len) {
             for (StorageItem c : this.folderContents) {
                 if (c instanceof File && c.getName().equals(file_name.toString())) return (File) c;
@@ -60,13 +63,14 @@ public class Folder extends StorageItem {
         this.folderContents.sort(comp);
     }
 
-    public void printer(SortingField name , int counter) {
+    public void printer(SortingField type , int counter) {
+        sort(type);
         System.out.println(this.getName());
         for (StorageItem item:this.folderContents){
             for (int i = 0 ; i < counter ; i++) {
-                System.out.print("    |");
+                System.out.print("|    ");
             }
-            printer(name , counter+1);
+            item.printer(type , counter+1);
         }
     }
 
