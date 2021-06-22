@@ -16,13 +16,15 @@ abstract class StorageItem {
     this.date = new Timestamp(temp + firstDate.getTime());
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     public Timestamp getDate() {
         return this.date;
     }
 
     abstract public int getSize();
 
-    void printTree(SortingField field) {
-        //need to implement
-    }
+    abstract void printTree();
 }
