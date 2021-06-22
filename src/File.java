@@ -28,5 +28,5 @@ public class File extends StorageItem {
         this.content = this.content + contentToAdd;
     }
 
-    public void printTree() { System.out.println(this.getName() + "." + this.suffix); }
+    public void printTree(SortingField type) { System.out.println(this.getName() + "." + this.suffix); }
 }

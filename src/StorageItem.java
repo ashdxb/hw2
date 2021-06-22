@@ -3,6 +3,7 @@ import java.sql.Timestamp;
 abstract class StorageItem {
     private Timestamp date;
     private String name;
+    protected int size;
 
     public StorageItem(String nameToSet){
     this.name = nameToSet;

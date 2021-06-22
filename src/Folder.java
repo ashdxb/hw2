@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Folder extends StorageItem {
 
@@ -12,20 +13,14 @@ public class Folder extends StorageItem {
 
     @Override
     public int getSize() {
-        int size = 0;
-        for (int i = 0 ; i < this.folderContents.size() ; i++){
-            size += folderContents.get(i).getSize();
-        }
-        return size;
+        return this.size;
     }
 
     public boolean addItem(StorageItem fi1) {
-        for (StorageItem item : folderContents){
-            if (item.getName().equals(fi1.getName())){
-                return false;
-            }
-        }
+        for (StorageItem item : folderContents)
+            if (item.getName().equals(fi1.getName())) return false;
         folderContents.add(fi1);
+        this.size+= fi1.getSize();
         return true;
     }
 
@@ -56,6 +51,17 @@ public class Folder extends StorageItem {
         }
     }
 
-    public void printTree(SortingField name) {
+    private void sort (SortingField type){
+        Comparator<StorageItem> comp;
+        if(type==SortingField.NAME)comp = Comparator.comparing(StorageItem::getName);
+        else if(type==SortingField.DATE)comp = Comparator.comparing(StorageItem::getDate);
+            else comp = Comparator.comparingInt(StorageItem::getSize);
+        comp.thenComparing(StorageItem::getName);
+        this.folderContents.sort(comp);
+    }
+
+    public void printTree(SortingField type) {
+    sort(type);
+    printer(type, 1);
     }
 }
