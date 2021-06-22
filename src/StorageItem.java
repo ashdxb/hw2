@@ -4,7 +4,6 @@ abstract class StorageItem {
     private Timestamp date;
     private String name;
 
-
     public StorageItem(String nameToSet){
     this.name = nameToSet;
     Timestamp firstDate = Timestamp.valueOf("2017-01-01 00:00:00");
@@ -17,17 +16,15 @@ abstract class StorageItem {
     this.date = new Timestamp(temp + firstDate.getTime());
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     public Timestamp getDate() {
         return this.date;
     }
 
     abstract public int getSize();
 
-    public String getName() {
-        return this.name;
-    }
-
-    void printTree(SortingField field) {
-        //need to implement
-    }
+    abstract void printTree();
 }

@@ -12,11 +12,21 @@ public class Folder extends StorageItem {
 
     @Override
     public int getSize() {
-        return 0;
+        int size = 0;
+        for (int i = 0 ; i < this.folderContents.size() ; i++){
+            size += folderContents.get(i).getSize();
+        }
+        return size;
     }
 
-    public void addItem(StorageItem fi1) {
+    public boolean addItem(StorageItem fi1) {
+        for (StorageItem item : folderContents){
+            if (item.getName().equals(fi1.getName())){
+                return false;
+            }
+        }
         folderContents.add(fi1);
+        return true;
     }
 
     public File findFile(String path) {
