@@ -3,18 +3,20 @@ public class File extends StorageItem {
     private String suffix;
     private String content;
 
-    public File(String fileName, String suffix) {
+    public File(String fileName, String suffix){
         super(fileName);
         this.suffix = suffix;
         this.content = "";
         this.fileName = fileName;
     }
 
+    /** size of file is defined as number of characters in a file's content*/
     @Override
     public int getSize() {
         return content.length();
     }
 
+    /** name of file is name.suffix */
     @Override
     public String getName() {
         return this.fileName + "." + suffix;
@@ -29,6 +31,11 @@ public class File extends StorageItem {
         this.content = this.content + contentToAdd;
     }
 
+    /**
+     * The tree of a file is just it's name
+     * and it ends there
+     */
+    @Override
     public void printTree(SortingField type) { System.out.println(this.getName()); }
 
     @Override

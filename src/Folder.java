@@ -6,16 +6,28 @@ public class Folder extends StorageItem {
     private ArrayList<StorageItem> folderContents;
     private String folderName;
 
+    /** a Folder is an arraylist of StorageItems
+     * that way, it can contain both files
+     * and folders
+     */
     public Folder(String folderName) {
         super(folderName);
         this.folderContents = new ArrayList<>();
     }
 
+    /** size is updated everytime we add an item */
     @Override
     public int getSize() {
         return this.size;
     }
 
+    /**
+     * Adds an item after checking there is no
+     * item in the folder with the same name
+     * Important: Two items of the same name but different
+     * extensions can still be put in the same
+     * folder
+     */
     public boolean addItem(StorageItem fi1) {
         for (StorageItem item : folderContents)
             if (item.getName().equals(fi1.getName())) return false;
@@ -24,6 +36,12 @@ public class Folder extends StorageItem {
         return true;
     }
 
+
+    /**
+     * Finds a file given a path formatted as something / something ...
+     * finds name of file to find given the path
+     * checks for an instance of this file
+     */
     public File findFile(String path) {
         if (path == null) return null;
         StringBuilder file_name = new StringBuilder();
@@ -54,6 +72,12 @@ public class Folder extends StorageItem {
         }
     }
 
+    /**
+     * Sorts the contents within a folder given
+     * the sorting parameter and using the
+     * Comparator.comparing and thencomparing
+     * functions
+     */
     private void sort (SortingField type){
         Comparator<StorageItem> comp;
         if(type==SortingField.NAME)comp = Comparator.comparing(StorageItem::getName);
@@ -63,6 +87,10 @@ public class Folder extends StorageItem {
         this.folderContents.sort(comp);
     }
 
+    /**
+     * Recursive function that first calls sort
+     * and then prints the tree
+     */
     public void printer(SortingField type , int counter) {
         sort(type);
         System.out.println(this.getName());
@@ -74,8 +102,12 @@ public class Folder extends StorageItem {
         }
     }
 
+    /**
+     * Sorts the first Folder and then
+     * calls "printer"
+     */
     public void printTree(SortingField type) {
-    sort(type);
-    printer(type, 1);
+        sort(type);
+        printer(type, 1);
     }
 }
